@@ -30,6 +30,7 @@ grunt.initConfig({
     },
     your_target: {
       dir: 'directory/to/analyze',
+      exclude: 'vendor/*.php', /* Optional. Can also use an array - exclude: ['pattern1', 'pattern2'] */
       command: 'run', /** also possible to use a target to automatically build the db/run any phpalizer command **/
     },
   },
