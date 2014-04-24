@@ -13,7 +13,8 @@ module.exports = function(grunt) {
             command: 'run'
         }), directory = path.normalize(this.data.dir), command = path.normalize(options.bin);
         
-        command += ' --ansi ' + (this.data.command ? this.data.command : options.command) + ' ' + directory;
+        command += ' --ansi ' + (this.data.exclude ? ' --exclude-pattern="' + this.data.exclude + '" ' : '');
+        command += (this.data.command ? this.data.command : options.command) + ' ' + directory;
         
         grunt.log.writeln('Starting phpalizer (target: ' + this.target.cyan + ') in ' + directory.cyan);
         grunt.verbose.writeln('Exec: ' + command);
