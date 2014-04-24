@@ -13,8 +13,16 @@ module.exports = function(grunt) {
             command: 'run'
         }), directory = path.normalize(this.data.dir), command = path.normalize(options.bin);
         
-        command += ' --ansi ' + (this.data.exclude ? ' --exclude-pattern="' + this.data.exclude + '" ' : '');
-        command += (this.data.command ? this.data.command : options.command) + ' ' + directory;
+        if ( this.data.exclude ) {
+            if ( Object.prototype.toString.call( this.data.exclude ) === '[object Array]' ) {
+                for (var i = 0; i < this.data.exclude.length; i++) {
+                    command += ' --exclude-pattern="' + this.data.exclude[i] + '"';
+                };
+            } else {
+                command += ' --exclude-pattern="' + this.data.exclude + '"';
+            }
+        }
+        command += ' --ansi ' + (this.data.command ? this.data.command : options.command) + ' ' + directory;
         
         grunt.log.writeln('Starting phpalizer (target: ' + this.target.cyan + ') in ' + directory.cyan);
         grunt.verbose.writeln('Exec: ' + command);
